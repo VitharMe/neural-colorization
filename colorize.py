@@ -41,7 +41,7 @@ if args.gpu>=0:
     G=G.cuda(args.gpu)
     G.load_state_dict(torch.load(args.model))
 else:
-    G.load_state_dict(torch.load(args.model,map_location={'cuda:0': 'cpu'}))
+    G.load_state_dict(torch.load(args.model,map_location=lambda storage, loc: storage))
 
 def inference(G,in_path,out_path):
     p=Image.open(in_path).convert('RGB')
